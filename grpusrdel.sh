@@ -1,5 +1,6 @@
 #!/bin/bash
 #-------------------------------------------------------------------------------------------------------------------------
+#Delete group if it exist
 echo "Insert username:"
 read usertoremove
 # Check if user exist
