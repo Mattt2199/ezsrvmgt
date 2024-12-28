@@ -1,16 +1,16 @@
 #!/bin/bash
 #-------------------------------------------------------------------------------------------------------------------------
-#Delete a group if exist
+#Delete a group if it exist
 echo "Insert group name:"
-read groupname
-# Check if group already exist
-if sudo getent group "$groupname" >/dev/null; then
-	# Generate error if group exist and explain to the user which is the problem
-	echo "-------------------- ERROR --------------------"
-	echo "GROUP $groupname ALREADY EXIST!"
-	echo "-----------------------------------------------"
+read deletegroupname
+# Check if group exist
+if sudo getent group "$deletegroupname" >/dev/null; then
+# If group exist, delete the group and maintain the users
+        sudo groupdel $deletegroupname
+        echo "$deletegroupname correctly removed!"
 else
-	# If gorup does not exist, create the group
-	sudo groupadd $groupname
-	echo "$groupname correctly added!"
+# Generate error if group does not exist and explain to the user which is the problem
+        echo "-------------------- ERROR --------------------"
+        echo "GROUP $deletegroupname DOES NOT EXIST!"
+        echo "-----------------------------------------------"
 fi
