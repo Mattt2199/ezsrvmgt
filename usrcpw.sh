@@ -1,6 +1,6 @@
 #!/bin/bash
 #-------------------------------------------------------------------------------------------------------------------------
-#Modify user password if exist
+#Modify user password if it exist
 echo "Insert username:"
 read modifyuserpassword
 # Check if user exist

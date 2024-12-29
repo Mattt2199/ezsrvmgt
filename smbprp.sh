@@ -53,6 +53,28 @@ do
         valid users = @$group
 "
 done
+listallusers=$(sudo awk -F: '($3>=1000 && $3<=50000) {printf "%s\n",$1}' /etc/passwd)
+for user in $listallusers
+do
+	if [ -d "/ezsrvshare/$user" ]; then
+                echo "/ezsrvshare/$user directory already exist!"
+        else
+                sudo mkdir /ezsrvshare/$user
+        fi
+        sudo chown -R $user:root /ezsrvshare/$user
+        sambaconfig+="[$user]
+        writeable = yes
+        comment = $user
+        force user = $user
+        force group = root
+        create mask = 0770
+        force create mode = 0770
+        directory mask = 0770
+        force directory mode = 0770
+        path = /ezsrvshare/$user
+        valid users = $user
+"
+done
 echo "$sambaconfig" > '/etc/samba/smb.conf'
 sudo systemctl restart smbd
 sudo systemctl restart nmbd

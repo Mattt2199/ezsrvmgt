@@ -1,6 +1,6 @@
 #!/bin/bash
 #-------------------------------------------------------------------------------------------------------------------------
-#Create a group if not exist
+#Create a group if it not exist
 echo "Insert group name:"
 read groupname
 # Check if group already exist

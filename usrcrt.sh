@@ -11,7 +11,7 @@ if sudo id -u "$addusername" >/dev/null 2>&1; then
         echo "-----------------------------------------------"
 else
 # If not exist, create the user, the password and the samba password
-        sudo useradd -m -s /bin/bash $addusername
+        sudo useradd -N -M -s /bin/bash $addusername
         echo "Insert password for user $addusername:"
         read adduserpass
         echo "$addusername:$adduserpass" | sudo chpasswd
